@@ -90,7 +90,7 @@ def idle_open(app_id):
         elif sys.platform.startswith('linux'):
             process_idle[app_id] = subprocess.Popen(["python2", "./libs/steam-idle.py", str(app_id)], stdout=DEVNULL, stderr=DEVNULL)
         else:
-            error("Not supported OS: " + sys.platform)
+            error("Operating system not supported: " + sys.platform)
     except Exception, e:
         error("Error starting steam-idle with game ID " + str(app_id) + ": " + str(e))
 
