@@ -1,1 +1,4 @@
-idlemaster.log
+/whitelist.txt
+/blacklist.txt
+/settings.py
+/logs/*.log
