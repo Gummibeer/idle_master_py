@@ -21,11 +21,11 @@ pacman -S python2-requests python2-colorama
 
 ## Authors
 
-gummibeer
+Idle-Time: [gummibeer](https://github.com/Gummibeer)
 
-original: jshackles and Stumpokapow
+Idle-Master: [jshackles](https://github.com/jshackles)
 
-steam-idle was writen in C# using Steamworks.NET and CSteamworks by Riley Labrecque
+Steamworks: [Riley Labrecque](https://github.com/rlabrecque)
 
 ## License
 
