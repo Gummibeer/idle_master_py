@@ -1,14 +1,18 @@
-import requests
-import time
-import subprocess
-import sys
-import os
+import ctypes
 import json
 import logging
-import ctypes
+import os
+import subprocess
+import sys
 import psutil
-import pynotify
+import requests
+import time
 from colorama import init, Fore
+
+if sys.platform.startswith('win32'):
+    from libs.WindowsBalloonTip import WindowsBalloonTip
+elif sys.platform.startswith('linux'):
+    import pynotify
 
 init()
 
@@ -47,14 +51,20 @@ def stop():
 
 def toast(title, message, category):
     images = {
-        'error': "./img/notify_error.png",
-        'warning': "./img/notify_warning.png"
+        'error': "./img/notify_error",
+        'warning': "./img/notify_warning"
     }
-    pynotify.init("steam-idle-time")
     image = os.path.realpath(images[category])
-    notice = pynotify.Notification('Steam-Idle-Time ' + title, message, image)
-    notice.set_timeout(10 * 1000)
-    notice.show()
+    title = 'Steam-Idle-Time ' + title
+    duration = 10
+    if sys.platform.startswith('win32'):
+        w = WindowsBalloonTip()
+        w.balloon_tip(title=title, msg=message, icon_path=image+'.ico', duration=duration)
+    elif sys.platform.startswith('linux'):
+        pynotify.init("steam-idle-time")
+        notice = pynotify.Notification(title=title, message=message, image=image+'.png')
+        notice.set_timeout(duration * 1000)
+        notice.show()
 
 
 def debug(message):

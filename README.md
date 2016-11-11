@@ -6,12 +6,7 @@ This program will idle multiple games at the same time to gain you play time and
 
 **PIP**
 ```
-pip install requests colorama psutil notify
-```
-
-**APT-GET**
-```
-apt-get install python-requests python-colorama python-psutill python-notify
+pip install requests colorama psutil notify pypiwin32
 ```
 
 ## Authors
