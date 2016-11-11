@@ -18,10 +18,10 @@ def get_steam_api():
     elif sys.platform.startswith('linux'):
         if platform.architecture()[0].startswith('32bit'):
             # print('Loading Linux 32bit library')
-            steam_api = CDLL('./libsteam_api32.so')
+            steam_api = CDLL('./libs/libsteam_api32.so')
         elif platform.architecture()[0].startswith('64bit'):
             # print('Loading Linux 64bit library')
-            steam_api = CDLL('./libsteam_api64.so')
+            steam_api = CDLL('./libs/libsteam_api64.so')
         else:
             print('Linux architecture not supported')
     elif sys.platform.startswith('darwin'):
