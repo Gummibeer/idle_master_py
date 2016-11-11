@@ -1,4 +1,6 @@
-/whitelist.txt
-/blacklist.txt
+/whitelist.*
+!/whitelist.sample.txt
+/blacklist.*
+!/blacklist.sample.txt
 /settings.py
 /logs/*.log
