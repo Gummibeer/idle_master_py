@@ -6,6 +6,8 @@ import os
 import json
 import logging
 import ctypes
+import psutil
+import pynotify
 from colorama import init, Fore
 
 init()
@@ -43,6 +45,18 @@ def stop():
         sys.exit()
 
 
+def toast(title, message, category):
+    images = {
+        'error': "./img/notify_error.png",
+        'warning': "./img/notify_warning.png"
+    }
+    pynotify.init("steam-idle-time")
+    image = os.path.realpath(images[category])
+    notice = pynotify.Notification('Steam-Idle-Time ' + title, message, image)
+    notice.set_timeout(10 * 1000)
+    notice.show()
+
+
 def debug(message):
     logging.debug(message + Fore.RESET)
 
@@ -53,11 +67,13 @@ def info(message):
 
 def warning(message):
     logging.warning(Fore.YELLOW + message + Fore.RESET)
+    toast('Warning', message, 'warning')
     stop()
 
 
 def error(message):
     logging.error(Fore.RED + message + Fore.RESET)
+    toast('Error', message, 'error')
     stop()
 
 
@@ -176,15 +192,39 @@ def get_games():
         error("Error reading games api: " + str(e))
 
 
+def is_running(program):
+    for pid in psutil.pids():
+        p = psutil.Process(pid)
+        if program in p.name():
+            return True
+
+    return False
+
+
+def steam_check():
+    if not is_running('steam'):
+        error('Steam is not running')
+    else:
+        debug('Steam is running')
+
+
 while True:
     try:
+        steam_check()
         games = get_games()
         for game in games:
             idle_open(game['appid'])
 
-        delay = settings['sleeping']
-        info("Idling for " + str(delay) + " minutes")
-        time.sleep(delay * 60)
+        sleeping = settings['sleeping']
+        info("Idling for " + str(sleeping) + " minutes")
+        idle = sleeping * 60
+        idled = 0
+        delay = 60
+
+        while idled <= idle:
+            time.sleep(delay)
+            steam_check()
+            idled += delay
 
         for game in games:
             idle_close(game['appid'])
