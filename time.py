@@ -62,7 +62,7 @@ def toast(title, message, category):
         w.balloon_tip(title=title, msg=message, icon_path=image+'.ico', duration=duration)
     elif sys.platform.startswith('linux'):
         pynotify.init("steam-idle-time")
-        notice = pynotify.Notification(title=title, message=message, image=image+'.png')
+        notice = pynotify.Notification(title, message, image+'.png')
         notice.set_timeout(duration * 1000)
         notice.show()
 
@@ -142,7 +142,11 @@ def get_blacklist():
     try:
         with open('blacklist.txt', 'r') as f:
             lines = f.readlines()
-        blacklist = [int(n.strip()) for n in lines]
+
+        blacklist = []
+        for n in lines:
+            if(n.strip() != ''):
+                blacklist.append(int(n.strip()))
     except:
         blacklist = []
 
@@ -156,7 +160,11 @@ def get_whitelist():
     try:
         with open('whitelist.txt', 'r') as f:
             lines = f.readlines()
-        whitelist = [int(n.strip()) for n in lines]
+
+            whitelist = []
+        for n in lines:
+            if(n.strip() != ''):
+                whitelist.append(int(n.strip()))
     except:
         whitelist = []
 
