@@ -7,6 +7,7 @@ import sys
 import psutil
 import requests
 import time
+import csv
 from colorama import init, Fore
 
 if sys.platform.startswith('win32'):
@@ -140,13 +141,11 @@ def get_app_name(app_id):
 
 def get_blacklist():
     try:
-        with open('blacklist.txt', 'r') as f:
-            lines = f.readlines()
-
-        blacklist = []
-        for n in lines:
-            if(n.strip() != ''):
-                blacklist.append(int(n.strip()))
+        with open('blacklist.csv', 'r') as f:
+            reader = csv.reader(f)
+            blacklist = []
+            for row in reader:
+                blacklist.append(int(row[0].strip()))
     except:
         blacklist = []
 
@@ -158,13 +157,11 @@ def get_blacklist():
 
 def get_whitelist():
     try:
-        with open('whitelist.txt', 'r') as f:
-            lines = f.readlines()
-
+        with open('whitelist.csv', 'r') as f:
+            reader = csv.reader(f)
             whitelist = []
-        for n in lines:
-            if(n.strip() != ''):
-                whitelist.append(int(n.strip()))
+            for row in reader:
+                whitelist.append(int(row[0].strip()))
     except:
         whitelist = []
 
