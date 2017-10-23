@@ -6,18 +6,17 @@ This program will idle multiple games at the same time to gain you play time and
 
 **PIP**
 ```
-pip install requests colorama psutil notify pypiwin32
+pip install requests colorama psutil notify
+# windows only
+pip install pypiwin32
 ```
 
 ## Authors
 
-Idle-Time: [gummibeer](https://github.com/Gummibeer)
-
-Idle-Master: [jshackles](https://github.com/jshackles)
-
-Steamworks: [Riley Labrecque](https://github.com/rlabrecque)
-
-Icons: [Paomedia](https://www.iconfinder.com/iconsets/small-n-flat)
+* Idle-Time: [gummibeer](https://github.com/Gummibeer)
+* Idle-Master: [jshackles](https://github.com/jshackles)
+* Steamworks: [Riley Labrecque](https://github.com/rlabrecque)
+* Icons: [Paomedia](https://www.iconfinder.com/iconsets/small-n-flat)
 
 ## Helpers
 

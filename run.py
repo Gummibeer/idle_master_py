@@ -22,15 +22,16 @@ os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 logging.basicConfig(
     filename="logs/idlemaster_time_" + str(time.time()) + ".log",
     filemode="w",
-    format="[ %(asctime)s ] %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S %p",
+    format="[%(asctime)s] [%(levelname)s] %(message)s",
+    datefmt="%d-%m-%Y %H:%M:%S",
     level=logging.DEBUG
 )
 console = logging.StreamHandler()
 console.setLevel(logging.DEBUG)
-console.setFormatter(logging.Formatter("[%(asctime)s] [%(levelname)s] %(message)s", "%d-%m-%Y %H:%M:%S"))
+console.setFormatter(logging.Formatter("%(message)s"))
 logging.getLogger('').addHandler(console)
 logging.getLogger("requests").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 if sys.platform.startswith('win32'):
     ctypes.windll.kernel32.SetConsoleTitleA("Idle Master")
